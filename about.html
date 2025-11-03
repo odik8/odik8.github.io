@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendly Frontend Starter | About</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="manifest" href="/assets/site.webmanifest">
+    <script src="/assets/main.js" type="module"></script>
+    <link rel="stylesheet" href="/assets/bundle.css">
+  </head>
+  <body>
+    <header class="header" data-js-overlay-menu="">
+      <div class="header__inner container">
+        <a class="logo header__logo" href="/" title="Home" aria-label="Home">
+          <img class="logo__image" src="/images/logo.svg" alt="" width="200" height="68" loading="eager">
+        </a>
+        <dialog class="header__overlay-menu-dialog" data-js-overlay-menu-dialog="">
+          <nav class="header__menu">
+            <ul class="header__menu-list">
+              <li class="header__menu-item">
+                <a class="header__menu-link" href="/">Home</a>
+              </li>
+              <li class="header__menu-item">
+                <a class="header__menu-link is-active" href="/about">About</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="header__actions">
+            <button class="button header__button" type="button"><span>Search</span><span class="icon">
+                <svg fill="none" stroke="currentColor">
+                  <use href="/assets/images/icons.svg#search"></use>
+                </svg>
+              </span></button>
+            <button class="button header__button" type="button"><span>Notifications</span><span class="icon">
+                <svg fill="none" stroke="currentColor">
+                  <use href="/assets/images/icons.svg#notification"></use>
+                </svg>
+              </span></button>
+          </div>
+        </dialog>
+        <button class="burger-button header__burger-button visible-tablet" type="button" aria-label="Open menu" title="Open menu" data-js-overlay-menu-burger-button="">
+          <svg class="burger-button__svg" width="30" height="30" viewBox="0 0 100 100">
+            <path class="burger-button__line burger-button__line--1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"></path>
+            <path class="burger-button__line burger-button__line--2" d="M 20,50 H 80"></path>
+            <path class="burger-button__line burger-button__line--3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <main class="content">
+      <h1>About page</h1>
+      <section class="section container" aria-labelledby="about-title">
+        <header class="section__header">
+          <h2 class="section__title h3" id="about-title">About section title</h2>
+          <div class="section__description">
+            <p>About section description</p>
+          </div>
+        </header>
+        <div class="section__body">
+          <p>About section content</p>
+          <img srcset="/assets/images/cat-360x360.jpg 360w, /assets/images/cat-400x398.jpg 400w" src="/assets/images/cat-400x398.jpg" sizes="(min-width: 400px) 400px, 100vw" width="400" height="398" alt decoding="async" loading="lazy">
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer__inner container">FOOTER</div>
+    </footer>
+  </body>
+</html>
