@@ -1,0 +1,48 @@
+.header {
+  position: sticky;
+  top: 1rem;
+
+  &Inner {
+    padding: 16px 32px;
+    background-color: var(--bg);
+    box-shadow: var(--shadow-m);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--border-radius-max);
+  }
+
+  &Nav {
+    position: relative;
+
+    &List {
+      position: relative;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 2;
+    }
+
+    &Item {
+      &Active {
+        color: var(--primary);
+      }
+    }
+
+    &Link {
+      padding: 0.5rem 1rem;
+    }
+
+    &Indicator {
+      position: absolute;
+      bottom: 0;
+      height: 100%;
+      border-radius: var(--border-radius-max);
+      transition: var(--transition);
+      font-weight: 500;
+      color: var(--primary);
+      background: var(--bg-light);
+      box-shadow: var(--shadow-s);
+      z-index: 1;
+    }
+  }
+}
