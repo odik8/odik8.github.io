@@ -1,86 +1,101 @@
 import styles from './Header.module.scss'
 import clsx from 'clsx'
-import {useEffect, useRef, useState} from "react";
+import {
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import type { SectionId } from '../../shared/sections'
 
-const Header = (props: any) => {
-  const {className} = props
+interface Section {
+  id: SectionId
+  name: string
+}
 
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [indicatorStyles, setIndicatorStyles] = useState({})
-  const navItemsRef = useRef([])
+interface HeaderProps {
+  sections: readonly Section[]
+  currentSection: SectionId
+  className?: string
+}
 
-  useEffect(() => {
-    const item = navItemsRef.current[activeIndex]
-    if (item) {
-      setIndicatorStyles({
-        left: `${item.offsetLeft}px`,
-        width: `${item.offsetWidth}px`
-      })
+const Header = ({
+                  sections,
+                  currentSection,
+                  className,
+                }: HeaderProps) => {
+  const itemsRef = useRef<Record<SectionId, HTMLLIElement | null>>(
+    {} as Record<SectionId, HTMLLIElement | null>
+  )
+
+  const [ready, setReady] = useState(false)
+
+  // 🔑 гарантируем, что refs уже есть
+  useLayoutEffect(() => {
+    setReady(true)
+  }, [])
+
+  const indicatorStyle = useMemo(() => {
+    if (!ready) return {}
+
+    const el = itemsRef.current[currentSection]
+    if (!el) return {}
+
+    return {
+      left: el.offsetLeft,
+      width: el.offsetWidth,
     }
-  }, [activeIndex]);
-
-  interface NavItem {
-    label: string;
-    href: string;
-  }
-
-  const navItems: NavItem[] = [
-    {
-      label: 'About',
-      href: '#about',
-    },
-    {
-      label: 'Skills',
-      href: '#skills'
-    },
-    {
-      label: 'Portfolio',
-      href: '#portfolio'
-    },
-    {
-      label: 'Work Experience',
-      href: '#workExperience'
-    },
-    {
-      label: 'Contacts',
-      href: '#contacts'
-    },
-  ]
+  }, [currentSection, ready])
 
   return (
     <header className={clsx(className, styles.header)}>
       <div className={styles.headerInner}>
-        <a className={styles.headerLogo}>
-          <img
-            className={styles.headerLogoImage}
-            src=""
-            alt=""
-            width="100"
-            height="35"
-            loading="eager"
-          />
+        <a href="/" className={styles.headerLogo}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="lucide lucide-code-xml-icon lucide-code-xml"
+          >
+            <path d="m18 16 4-4-4-4" />
+            <path d="m6 8-4 4 4 4" />
+            <path d="m14.5 4-5 16" />
+          </svg>
         </a>
+
         <nav className={styles.headerNav}>
           <ul className={styles.headerNavList}>
-            {navItems.map(({label, href}, idx) => (
+            {sections.map(({id, name}) => (
               <li
-                ref={element => {
-                  navItemsRef.current[idx] = element
+                key={id}
+                ref={el => {
+                  itemsRef.current[id] = el
                 }}
-                className={clsx(styles.headerNavItem, activeIndex === idx && styles.headerNavItemActive)}
-                key={href}
-                onClick={() => setActiveIndex(idx)}
+                className={clsx(
+                  styles.headerNavItem,
+                  currentSection === id && styles.headerNavItemActive
+                )}
               >
                 <a
                   className={styles.headerNavLink}
-                  href={href}
+                  href={`#${id}`}
                 >
-                  {label}
+                  {name}
                 </a>
               </li>
             ))}
           </ul>
-          <div className={styles.headerNavIndicator} style={indicatorStyles}></div>
+
+          <div
+            className={styles.headerNavIndicator}
+            style={indicatorStyle}
+          />
         </nav>
       </div>
     </header>

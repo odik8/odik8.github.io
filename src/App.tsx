@@ -1,40 +1,56 @@
 import './assets/styles'
-import Header from "./components/Header";
-import {useState} from "react";
+import { useEffect, useState } from 'react'
+import Header from './components/Header'
+import { SECTIONS } from './shared/sections'
+import type { SectionId } from "./shared/sections";
 
 function App() {
+  const [currentSection, setCurrentSection] = useState<SectionId>('about')
 
-  const [currentSection, setCurrentSection] = useState('')
-  
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>('section[id]')
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const visibleEntry = entries
+          .find(entry => entry.isIntersecting)
+
+        if (visibleEntry) {
+          setCurrentSection(visibleEntry.target.id as SectionId)
+        }
+      },
+      {
+        threshold: 0.5,
+      }
+    )
+
+    elements.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
-      <Header/>
-      <hr/>
-      <section id="about" style={{
-        height: '100vh',
-        background: 'var(--bg)'
-      }}></section>
-      <hr/>
-      <section id="skills" style={{
-        height: '100vh',
-        background: 'var(--bg-light)'
-      }}></section>
-      <hr/>
-      <section id="portfolio" style={{
-        height: '100vh',
-        background: 'var(--bg)'
-      }}></section>
-      <hr/>
-      <section id="workExperience" style={{
-        height: '100vh',
-        background: 'var(--bg-light)'
-      }}></section>
-      <hr/>
-      <section id="contacts" style={{
-        height: '100vh',
-        background: 'var(--bg)'
-      }}></section>
-      <hr/>
+      <Header
+        sections={SECTIONS}
+        currentSection={currentSection}
+      />
+      <div style={{
+        height: '91px'
+      }}></div>
+
+      {SECTIONS.map(({id, name}) => (
+        <section
+          key={id}
+          id={id}
+          style={{
+            height: '90vh',
+            background: 'var(--bg)',
+            marginBottom: '1rem',
+          }}
+        >
+          {name}
+        </section>
+      ))}
     </>
   )
 }
