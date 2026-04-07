@@ -39,8 +39,8 @@ body {
   sans-serif;
   font-size: 14px;
   margin: 0 auto !important;
-  max-width: min(90vw, 1200px);
-  padding-block: 1rem;
+  /*max-width: min(90vw, 1200px);*/
+  /*padding: 2rem;*/
   background: var(--bg-dark);
   color: var(--text-muted);
 }
@@ -153,14 +153,17 @@ a[class] {
   color: var(--primary);
 }
 
+.text-light {
+  color: var(--text);
+}
+
 .home-swiper__slide {
-  padding: 0 8%;
+  padding: 2rem 4rem;
   font-size: 18px;
   background: var(--bg);
 
   display: flex !important;
   justify-content: center;
-  align-items: center;
 }
 
 .home-swiper__pagination {
@@ -190,7 +193,92 @@ a[class] {
   background-color: var(--text);
 }
 
+.section {
+  display: flex;
+  padding: 1rem;
+  background-color: var(--bg);
+}
+
+.section__inner {
+  display: flex ;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero {
+  display: flex;
+}
+
 .hero__inner {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.grid {
+  --columns: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: 1rem;
+}
+
+.grid--2 {
+  --columns: 2;
+}
+
+.skills {
+  display: flex;
+}
+
+.skills__column {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 3rem;
+    width: 100%;
+    bottom: 0;
+    background-image: linear-gradient(0deg, var(--bg) 0%, transparent 100%);
+  }
+}
+
+.skills__body {
+  overflow: auto;
+  padding-bottom: 3rem;
+}
+
+.skills__title {
+  position: sticky;
+  top: 0;
+  padding-bottom: 2rem;
+  background: var(--bg);
+  margin: 0 !important;
+  z-index: 2;
+}
+
+.skill-card {
+  --dotSize: 12px;
+  --padding: 1rem;
+  padding: var(--padding);
+  padding-left: calc(var(--padding) * 2 + var(--dotSize));
+  box-shadow: var(--shadow-s);
+  background-color: var(--bg-light);
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.skill-card:before {
+  position: absolute;
+  content: "";
+  left: var(--padding);
+  top: calc(var(--padding) + .45em);
+  width: var(--dotSize);
+  height: var(--dotSize);
+  border-radius: 50%;
+  background-color: var(--primary);
 }
