@@ -10,6 +10,10 @@
   <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/main.css">
+  <!-- Mark loading synchronously (before first paint) so the loader is up and
+       the hero's entrance animations stay paused until the loader hands off.
+       The deferred module below would apply this too late. -->
+  <script>document.documentElement.classList.add('is-loading');</script>
   <script type="module" src="js/app.js"></script>
   <noscript>
     <style>.loader { display: none; }</style>
@@ -19,16 +23,20 @@
 
   <!-- ======================= LOADER ======================= -->
   <div class="loader" data-js="loader" role="status" aria-live="polite" aria-label="Загрузка сайта">
-    <div class="loader__core" aria-hidden="true">
+    <div class="loader__stage" aria-hidden="true">
       <span class="loader__glow"></span>
-      <span class="loader__ring"></span>
-      <span class="loader__ring loader__ring--dashed"></span>
-      <span class="loader__spinner">
-        <span class="loader__satellite"></span>
-      </span>
-      <img class="loader__logo" src="assets/logo-mark.svg" alt="" width="44" height="50">
+      <svg class="loader__logo" data-js="loader-logo" width="104" height="120" viewBox="0 0 41.5 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="wcg-loader" x1="0" y1="0" x2="41.5" y2="48" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A86F0"></stop>
+            <stop offset="1" stop-color="#1D4CAB"></stop>
+          </linearGradient>
+        </defs>
+        <path class="loader__path loader__path--outer" pathLength="1" stroke="url(#wcg-loader)" fill="url(#wcg-loader)" d="M22.0853 1.354L25.06 4.34008C25.7964 5.07928 25.7965 6.27793 25.0601 7.01718L10.4485 21.6867C10.0949 22.0417 9.89632 22.5231 9.89632 23.0252V24.7847C9.89632 25.2777 10.0879 25.7513 10.4303 26.1047L25.4542 41.6082C26.2162 42.3945 26.1549 43.6645 25.3207 44.3732L22.0764 47.1295C21.3214 47.7709 20.2011 47.7175 19.5099 47.0071L1.5523 28.5476C1.14589 28.1299 0.77113 27.676 0.55417 27.1342C0.294896 26.4867 0.00070966 25.4601 1.27608e-06 24.1339C-0.000709196 22.8039 0.295384 21.7752 0.555639 21.128C0.771936 20.5901 1.1445 20.1394 1.54817 19.7244L19.4037 1.36998C20.1373 0.615966 21.3429 0.608779 22.0853 1.354Z"></path>
+        <path class="loader__path loader__path--inner" pathLength="1" stroke="url(#wcg-loader)" fill="url(#wcg-loader)" d="M20.0719 28.2537L15.8311 24.3506C15.4266 23.9783 15.423 23.3392 15.8233 22.9624L29.4652 10.1216C29.8491 9.76024 30.4533 9.78447 30.8074 10.1754L39.5897 19.875C39.5897 19.875 41.0036 21.2946 41.0036 23.6607C41.0036 26.0268 39.5897 27.9196 39.5897 27.9196L30.8609 37.5601C30.487 37.9731 29.84 37.9731 29.466 37.5601L26.0239 33.7584C25.6983 33.3988 25.6968 32.85 26.0207 32.4887L32.0305 25.7842C33.0799 24.6136 32.9796 22.809 31.8073 21.7627L29.6922 19.875L21.3754 28.2253C21.0186 28.5836 20.444 28.5962 20.0719 28.2537Z"></path>
+      </svg>
     </div>
-    <span class="loader__text">Web-Cosmos</span>
+    <!-- <span class="loader__text" data-js="loader-text">Web-Cosmos</span> -->
   </div>
 
   <a class="skip-link" href="#main">Перейти к содержанию</a>
@@ -139,68 +147,100 @@
 
           <ul class="services__grid" data-js="reveal-group">
             <li class="service-card">
-              <div class="service-card__head">
-                <h3 class="service-card__title">Создание сайта клиники, медицинского центра</h3>
-                <span class="service-card__arrow" aria-hidden="true">→</span>
+              <img class="service-card__media" src="assets/services/site.jpg" alt="" loading="lazy" width="600" height="800">
+              <span class="service-card__overlay" aria-hidden="true"></span>
+              <div class="service-card__body">
+                <div class="service-card__head">
+                  <h3 class="service-card__title">Создание сайта клиники, медицинского центра</h3>
+                  <span class="service-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <p class="service-card__desc">По закону Российской Федерации у всех медицинских учреждений должен быть сайт.</p>
+                <span class="service-card__price">по запросу</span>
               </div>
-              <p class="service-card__desc">По закону Российской Федерации у всех медицинских учреждений должен быть сайт.</p>
-              <span class="service-card__price">по запросу</span>
             </li>
             <li class="service-card">
-              <div class="service-card__head">
-                <h3 class="service-card__title">SEO-аудит</h3>
-                <span class="service-card__arrow" aria-hidden="true">→</span>
+              <img class="service-card__media" src="assets/services/audit.jpg" alt="" loading="lazy" width="600" height="800">
+              <span class="service-card__overlay" aria-hidden="true"></span>
+              <div class="service-card__body">
+                <div class="service-card__head">
+                  <h3 class="service-card__title">SEO-аудит</h3>
+                  <span class="service-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <p class="service-card__desc">Приводим заинтересованную в ваших услугах и продукте аудиторию, добиваемся роста продаж с минимальными затратами времени.</p>
+                <span class="service-card__price">от 10 000 руб/месяц</span>
               </div>
-              <p class="service-card__desc">Приводим заинтересованную в ваших услугах и продукте аудиторию, добиваемся роста продаж с минимальными затратами времени.</p>
-              <span class="service-card__price">от 10 000 руб/месяц</span>
             </li>
             <li class="service-card">
-              <div class="service-card__head">
-                <h3 class="service-card__title">SMM: продвижение в соцсетях</h3>
-                <span class="service-card__arrow" aria-hidden="true">→</span>
+              <img class="service-card__media" src="assets/services/smm.jpg" alt="" loading="lazy" width="600" height="800">
+              <span class="service-card__overlay" aria-hidden="true"></span>
+              <div class="service-card__body">
+                <div class="service-card__head">
+                  <h3 class="service-card__title">SMM: продвижение в соцсетях</h3>
+                  <span class="service-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <p class="service-card__desc">Работаем со всеми социальными сетями, чтобы охватить максимум целевой аудитории.</p>
+                <span class="service-card__price">от 15 000 руб</span>
               </div>
-              <p class="service-card__desc">Работаем со всеми социальными сетями, чтобы охватить максимум целевой аудитории.</p>
-              <span class="service-card__price">от 15 000 руб</span>
             </li>
             <li class="service-card">
-              <div class="service-card__head">
-                <h3 class="service-card__title">SEO продвижение</h3>
-                <span class="service-card__arrow" aria-hidden="true">→</span>
+              <img class="service-card__media" src="assets/services/seo.jpg" alt="" loading="lazy" width="600" height="800">
+              <span class="service-card__overlay" aria-hidden="true"></span>
+              <div class="service-card__body">
+                <div class="service-card__head">
+                  <h3 class="service-card__title">SEO продвижение</h3>
+                  <span class="service-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <p class="service-card__desc">Оптимизируем сайты с использованием лучших методов. Быстро выводим ресурс в ТОП.</p>
+                <span class="service-card__price">от 30 000 руб</span>
               </div>
-              <p class="service-card__desc">Оптимизируем сайты с использованием лучших методов. Быстро выводим ресурс в ТОП.</p>
-              <span class="service-card__price">от 30 000 руб</span>
             </li>
             <li class="service-card">
-              <div class="service-card__head">
-                <h3 class="service-card__title">Настройка и ведение Яндекс Директ</h3>
-                <span class="service-card__arrow" aria-hidden="true">→</span>
+              <img class="service-card__media" src="assets/services/direct.jpg" alt="" loading="lazy" width="600" height="800">
+              <span class="service-card__overlay" aria-hidden="true"></span>
+              <div class="service-card__body">
+                <div class="service-card__head">
+                  <h3 class="service-card__title">Настройка и ведение Яндекс Директ</h3>
+                  <span class="service-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <p class="service-card__desc">Ведём рекламную кампанию на всём её протяжении. Добиваемся высокого уровня эффективности.</p>
+                <span class="service-card__price">от 20 000 руб</span>
               </div>
-              <p class="service-card__desc">Ведём рекламную кампанию на всём её протяжении. Добиваемся высокого уровня эффективности.</p>
-              <span class="service-card__price">от 20 000 руб</span>
             </li>
             <li class="service-card">
-              <div class="service-card__head">
-                <h3 class="service-card__title">Медицинский копирайтинг</h3>
-                <span class="service-card__arrow" aria-hidden="true">→</span>
+              <img class="service-card__media" src="assets/services/copy.jpg" alt="" loading="lazy" width="600" height="800">
+              <span class="service-card__overlay" aria-hidden="true"></span>
+              <div class="service-card__body">
+                <div class="service-card__head">
+                  <h3 class="service-card__title">Медицинский копирайтинг</h3>
+                  <span class="service-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <p class="service-card__desc">Экспертные тексты, которые интересно читать, нравятся поисковикам и привлекают трафик на сайт.</p>
+                <span class="service-card__price">от 700 руб</span>
               </div>
-              <p class="service-card__desc">Экспертные тексты, которые интересно читать, нравятся поисковикам и привлекают трафик на сайт.</p>
-              <span class="service-card__price">от 700 руб</span>
             </li>
             <li class="service-card">
-              <div class="service-card__head">
-                <h3 class="service-card__title">Комплексное продвижение</h3>
-                <span class="service-card__arrow" aria-hidden="true">→</span>
+              <img class="service-card__media" src="assets/services/complex.jpg" alt="" loading="lazy" width="600" height="800">
+              <span class="service-card__overlay" aria-hidden="true"></span>
+              <div class="service-card__body">
+                <div class="service-card__head">
+                  <h3 class="service-card__title">Комплексное продвижение</h3>
+                  <span class="service-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <p class="service-card__desc">Сайт, SEO, реклама и аналитика в одной связке — берём весь маркетинг клиники на себя.</p>
+                <span class="service-card__price">по запросу</span>
               </div>
-              <p class="service-card__desc">Сайт, SEO, реклама и аналитика в одной связке — берём весь маркетинг клиники на себя.</p>
-              <span class="service-card__price">по запросу</span>
             </li>
             <li class="service-card">
-              <div class="service-card__head">
-                <h3 class="service-card__title">Контекстная реклама</h3>
-                <span class="service-card__arrow" aria-hidden="true">→</span>
+              <img class="service-card__media" src="assets/services/context.jpg" alt="" loading="lazy" width="600" height="800">
+              <span class="service-card__overlay" aria-hidden="true"></span>
+              <div class="service-card__body">
+                <div class="service-card__head">
+                  <h3 class="service-card__title">Контекстная реклама</h3>
+                  <span class="service-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <p class="service-card__desc">Настраиваем кампании с учётом требований к рекламе медицинских услуг.</p>
+                <span class="service-card__price">по запросу</span>
               </div>
-              <p class="service-card__desc">Настраиваем кампании с учётом требований к рекламе медицинских услуг.</p>
-              <span class="service-card__price">по запросу</span>
             </li>
           </ul>
         </section>
