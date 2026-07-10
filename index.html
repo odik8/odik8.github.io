@@ -1,530 +1,175 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Web-Cosmos — маркетинг и аналитика в медицине</title>
-  <meta name="description" content="Продвижение и реклама для медицинских клиник. Разработка, SEO и реклама для медицинских центров с 2008 года.">
-  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
-  <link rel="preload" href="fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/fonts.css">
-  <link rel="stylesheet" href="css/main.css">
-  <!-- Mark loading synchronously (before first paint) so the loader is up and
-       the hero's entrance animations stay paused until the loader hands off.
-       The deferred module below would apply this too late. -->
-  <script>document.documentElement.classList.add('is-loading');</script>
-  <script type="module" src="js/app.js"></script>
-  <noscript>
-    <style>.loader { display: none; }</style>
-  </noscript>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проекты — odik8</title>
+  <meta name="description" content="Проекты odik8: лендинг Web-Cosmos (маркетинг и аналитика в медицине) и веб-приложение ЛК-Право (юридические услуги и договоры).">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>">
+  <style>
+    :root {
+      --bg: #0b1224;
+      --bg-deep: #070c18;
+      --ink: #eef2fb;
+      --muted: #8a93ad;
+      --card: #121a30;
+      --card-hover: #16203a;
+      --border: rgba(255, 255, 255, 0.08);
+      --cosmos: #6d9af0;
+      --cosmos-glow: rgba(42, 99, 212, 0.35);
+      --pravo: #e5484d;
+      --pravo-glow: rgba(229, 72, 77, 0.30);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 15% -10%, rgba(42, 99, 212, 0.18), transparent 60%),
+        radial-gradient(1000px 500px at 100% 110%, rgba(229, 72, 77, 0.12), transparent 55%),
+        linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { width: 100%; max-width: 960px; }
+
+    .head { text-align: center; margin-bottom: 44px; }
+
+    .kicker {
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; letter-spacing: -0.02em; }
+
+    .sub { margin-top: 12px; color: var(--muted); font-size: clamp(15px, 2.4vw, 18px); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 240px;
+      padding: 30px;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(420px 220px at 20% -20%, var(--accent-glow), transparent 70%);
+      opacity: 0.7;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--card-hover);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+      box-shadow: 0 24px 60px -30px var(--accent-glow);
+    }
+    .card:hover::after { opacity: 1; }
+
+    .card.cosmos { --accent: var(--cosmos); --accent-glow: var(--cosmos-glow); }
+    .card.pravo  { --accent: var(--pravo);  --accent-glow: var(--pravo-glow); }
+
+    .tag {
+      align-self: flex-start;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 5px 11px;
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+
+    .card h2 { margin-top: 20px; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+
+    .card p { margin-top: 10px; color: var(--muted); font-size: 15px; line-height: 1.55; }
+
+    .go {
+      margin-top: auto;
+      padding-top: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .go svg { transition: transform 0.25s ease; }
+    .card:hover .go svg { transform: translateX(4px); }
+
+    .foot { margin-top: 40px; text-align: center; color: var(--muted); font-size: 13px; }
+    .foot a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .foot a:hover { color: var(--ink); }
+
+    @media (max-width: 680px) {
+      .grid { grid-template-columns: 1fr; }
+      body { padding: 24px 18px; }
+    }
+  </style>
 </head>
-<body class="page">
+<body>
+  <main class="wrap">
+    <header class="head">
+      <span class="kicker">odik8.github.io</span>
+      <h1>Проекты</h1>
+      <p class="sub">Выберите проект, чтобы открыть его</p>
+    </header>
 
-  <!-- ======================= LOADER ======================= -->
-  <div class="loader" data-js="loader" role="status" aria-live="polite" aria-label="Загрузка сайта">
-    <div class="loader__stage" aria-hidden="true">
-      <span class="loader__glow"></span>
-      <svg class="loader__logo" data-js="loader-logo" width="104" height="120" viewBox="0 0 41.5 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="wcg-loader" x1="0" y1="0" x2="41.5" y2="48" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#4A86F0"></stop>
-            <stop offset="1" stop-color="#1D4CAB"></stop>
-          </linearGradient>
-        </defs>
-        <path class="loader__path loader__path--outer" pathLength="1" stroke="url(#wcg-loader)" fill="url(#wcg-loader)" d="M22.0853 1.354L25.06 4.34008C25.7964 5.07928 25.7965 6.27793 25.0601 7.01718L10.4485 21.6867C10.0949 22.0417 9.89632 22.5231 9.89632 23.0252V24.7847C9.89632 25.2777 10.0879 25.7513 10.4303 26.1047L25.4542 41.6082C26.2162 42.3945 26.1549 43.6645 25.3207 44.3732L22.0764 47.1295C21.3214 47.7709 20.2011 47.7175 19.5099 47.0071L1.5523 28.5476C1.14589 28.1299 0.77113 27.676 0.55417 27.1342C0.294896 26.4867 0.00070966 25.4601 1.27608e-06 24.1339C-0.000709196 22.8039 0.295384 21.7752 0.555639 21.128C0.771936 20.5901 1.1445 20.1394 1.54817 19.7244L19.4037 1.36998C20.1373 0.615966 21.3429 0.608779 22.0853 1.354Z"></path>
-        <path class="loader__path loader__path--inner" pathLength="1" stroke="url(#wcg-loader)" fill="url(#wcg-loader)" d="M20.0719 28.2537L15.8311 24.3506C15.4266 23.9783 15.423 23.3392 15.8233 22.9624L29.4652 10.1216C29.8491 9.76024 30.4533 9.78447 30.8074 10.1754L39.5897 19.875C39.5897 19.875 41.0036 21.2946 41.0036 23.6607C41.0036 26.0268 39.5897 27.9196 39.5897 27.9196L30.8609 37.5601C30.487 37.9731 29.84 37.9731 29.466 37.5601L26.0239 33.7584C25.6983 33.3988 25.6968 32.85 26.0207 32.4887L32.0305 25.7842C33.0799 24.6136 32.9796 22.809 31.8073 21.7627L29.6922 19.875L21.3754 28.2253C21.0186 28.5836 20.444 28.5962 20.0719 28.2537Z"></path>
-      </svg>
+    <div class="grid">
+      <a class="card cosmos" href="web-cosmos/">
+        <span class="tag">Лендинг</span>
+        <h2>Web-Cosmos</h2>
+        <p>Маркетинг и аналитика в медицине: разработка, SEO и реклама для клиник и медицинских центров.</p>
+        <span class="go">
+          Открыть
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card pravo" href="lk-pravo/">
+        <span class="tag">Веб-приложение</span>
+        <h2>ЛК-Право</h2>
+        <p>Юридические услуги и сопровождение договоров с помощью ИИ: подготовка, анализ и оформление документов.</p>
+        <span class="go">
+          Открыть
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
     </div>
-    <!-- <span class="loader__text" data-js="loader-text">Web-Cosmos</span> -->
-  </div>
 
-  <a class="skip-link" href="#main">Перейти к содержанию</a>
-
-  <div class="page__bg" data-js="dot-grid" aria-hidden="true"></div>
-
-  <div class="page__frame">
-    <div class="page__inner">
-
-      <!-- <div class="page__glow" data-js="cursor-glow" aria-hidden="true"></div> -->
-
-      <!-- ======================= HEADER ======================= -->
-      <header class="header">
-        <div class="header__group">
-          <a class="logo header__logo" href="#hero" aria-label="Web-Cosmos — на главный экран">
-            <img class="logo__mark" src="assets/logo-mark.svg" alt="" width="24" height="27">
-            <span class="logo__text">
-              <span class="logo__name">WEBCOSMOS</span>
-              <span class="logo__tagline">маркетинг и аналитика в медицине</span>
-            </span>
-          </a>
-          <nav class="nav header__nav" aria-label="Основные разделы">
-            <ul class="nav__list">
-              <li class="nav__item"><a class="nav__link" href="#services">Услуги</a></li>
-              <li class="nav__item"><a class="nav__link" href="#promo">Акции</a></li>
-              <li class="nav__item"><a class="nav__link" href="#about">О компании</a></li>
-              <li class="nav__item"><a class="nav__link" href="#blog">Блог</a></li>
-              <li class="nav__item"><a class="nav__link" href="#contact">Контакты</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="header__contacts">
-          <a class="header__phone" href="tel:+78652600300">+7 (8652) 60-03-00</a>
-          <a class="btn btn--primary header__cta" href="#contact">Консультация</a>
-        </div>
-      </header>
-
-      <main id="main">
-
-        <!-- ======================= HERO ======================= -->
-        <section class="hero" id="hero" aria-labelledby="hero-title">
-          <div class="hero__bg" data-js="constellation" aria-hidden="true"></div>
-          <div class="hero__blob hero__blob--left" aria-hidden="true"></div>
-          <div class="hero__blob hero__blob--right" aria-hidden="true"></div>
-          <div class="hero__veil" aria-hidden="true"></div>
-
-          <div class="hero__content">
-            <p class="badge hero__badge">
-              <span class="badge__dot" aria-hidden="true">
-                <span class="badge__dot-core"></span>
-                <span class="badge__dot-ping"></span>
-              </span>
-              <span class="badge__text">МАРКЕТИНГ И АНАЛИТИКА В МЕДИЦИНЕ</span>
-              <span class="badge__dot" aria-hidden="true">
-                <span class="badge__dot-core"></span>
-                <span class="badge__dot-ping badge__dot-ping--delayed"></span>
-              </span>
-            </p>
-
-            <h1 class="hero__title" id="hero-title" data-js="glow-target">
-              <span class="hero__title-kicker">Продвижение и реклама</span>
-              <span class="hero__title-accent">Для медицинских клиник</span>
-            </h1>
-
-            <p class="hero__lead" data-js="glow-target">Мы знаем всё о том, как привести пациентов в клинику! <span class="hero__lead-highlight">Разработка, SEO и реклама</span> для медицинских центров с 2008 года.</p>
-
-            <div class="hero__actions">
-              <a class="btn btn--gradient hero__action" href="#contact">
-                Оставить заявку
-                <span class="btn__arrow" aria-hidden="true">→</span>
-              </a>
-              <a class="btn btn--outline hero__action" href="#contact">SEO-аудит бесплатно</a>
-            </div>
-
-            <ul class="hero__tags" aria-label="Направления">
-              <li class="hero__tag">#Медицина</li>
-              <li class="hero__tag">#Разработка</li>
-              <li class="hero__tag">#SEO</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- ======================= ADVANTAGES ======================= -->
-        <section class="advantages" data-js="reveal-group" aria-label="Наши преимущества">
-          <div class="advantage advantage--lead">
-            <h2 class="advantage__title">Рост продаж услуг и товаров</h2>
-            <p class="advantage__text">Используем лучшие инструменты маркетинга</p>
-          </div>
-          <div class="advantage">
-            <h2 class="advantage__title">Результат в минимальные сроки</h2>
-            <p class="advantage__text">Первые результаты можно увидеть уже через две-три недели</p>
-          </div>
-          <div class="advantage">
-            <h2 class="advantage__title">Возможность масштабирования</h2>
-            <p class="advantage__text">Не останавливаемся на достигнутом — постоянно прорабатываем новые точки роста</p>
-          </div>
-        </section>
-
-        <!-- ======================= SERVICES ======================= -->
-        <section class="services" id="services" aria-labelledby="services-title">
-          <div class="section-head services__head" data-js="reveal">
-            <div class="section-head__titles">
-              <span class="eyebrow">УСЛУГИ</span>
-              <h2 class="section-head__title" id="services-title">Продвижение и раскрутка сайта</h2>
-            </div>
-            <p class="section-head__note">Полный цикл: от создания сайта клиники до стабильного потока заявок из поиска и рекламы.</p>
-          </div>
-
-          <ul class="services__grid" data-js="reveal-group">
-            <li class="service-card">
-              <img class="service-card__media" src="assets/services/site.jpg" alt="" loading="lazy" width="600" height="800">
-              <span class="service-card__overlay" aria-hidden="true"></span>
-              <div class="service-card__body">
-                <div class="service-card__head">
-                  <h3 class="service-card__title">Создание сайта клиники, медицинского центра</h3>
-                  <span class="service-card__arrow" aria-hidden="true">→</span>
-                </div>
-                <p class="service-card__desc">По закону Российской Федерации у всех медицинских учреждений должен быть сайт.</p>
-                <span class="service-card__price">по запросу</span>
-              </div>
-            </li>
-            <li class="service-card">
-              <img class="service-card__media" src="assets/services/audit.jpg" alt="" loading="lazy" width="600" height="800">
-              <span class="service-card__overlay" aria-hidden="true"></span>
-              <div class="service-card__body">
-                <div class="service-card__head">
-                  <h3 class="service-card__title">SEO-аудит</h3>
-                  <span class="service-card__arrow" aria-hidden="true">→</span>
-                </div>
-                <p class="service-card__desc">Приводим заинтересованную в ваших услугах и продукте аудиторию, добиваемся роста продаж с минимальными затратами времени.</p>
-                <span class="service-card__price">от 10 000 руб/месяц</span>
-              </div>
-            </li>
-            <li class="service-card">
-              <img class="service-card__media" src="assets/services/smm.jpg" alt="" loading="lazy" width="600" height="800">
-              <span class="service-card__overlay" aria-hidden="true"></span>
-              <div class="service-card__body">
-                <div class="service-card__head">
-                  <h3 class="service-card__title">SMM: продвижение в соцсетях</h3>
-                  <span class="service-card__arrow" aria-hidden="true">→</span>
-                </div>
-                <p class="service-card__desc">Работаем со всеми социальными сетями, чтобы охватить максимум целевой аудитории.</p>
-                <span class="service-card__price">от 15 000 руб</span>
-              </div>
-            </li>
-            <li class="service-card">
-              <img class="service-card__media" src="assets/services/seo.jpg" alt="" loading="lazy" width="600" height="800">
-              <span class="service-card__overlay" aria-hidden="true"></span>
-              <div class="service-card__body">
-                <div class="service-card__head">
-                  <h3 class="service-card__title">SEO продвижение</h3>
-                  <span class="service-card__arrow" aria-hidden="true">→</span>
-                </div>
-                <p class="service-card__desc">Оптимизируем сайты с использованием лучших методов. Быстро выводим ресурс в ТОП.</p>
-                <span class="service-card__price">от 30 000 руб</span>
-              </div>
-            </li>
-            <li class="service-card">
-              <img class="service-card__media" src="assets/services/direct.jpg" alt="" loading="lazy" width="600" height="800">
-              <span class="service-card__overlay" aria-hidden="true"></span>
-              <div class="service-card__body">
-                <div class="service-card__head">
-                  <h3 class="service-card__title">Настройка и ведение Яндекс Директ</h3>
-                  <span class="service-card__arrow" aria-hidden="true">→</span>
-                </div>
-                <p class="service-card__desc">Ведём рекламную кампанию на всём её протяжении. Добиваемся высокого уровня эффективности.</p>
-                <span class="service-card__price">от 20 000 руб</span>
-              </div>
-            </li>
-            <li class="service-card">
-              <img class="service-card__media" src="assets/services/copy.jpg" alt="" loading="lazy" width="600" height="800">
-              <span class="service-card__overlay" aria-hidden="true"></span>
-              <div class="service-card__body">
-                <div class="service-card__head">
-                  <h3 class="service-card__title">Медицинский копирайтинг</h3>
-                  <span class="service-card__arrow" aria-hidden="true">→</span>
-                </div>
-                <p class="service-card__desc">Экспертные тексты, которые интересно читать, нравятся поисковикам и привлекают трафик на сайт.</p>
-                <span class="service-card__price">от 700 руб</span>
-              </div>
-            </li>
-            <li class="service-card">
-              <img class="service-card__media" src="assets/services/complex.jpg" alt="" loading="lazy" width="600" height="800">
-              <span class="service-card__overlay" aria-hidden="true"></span>
-              <div class="service-card__body">
-                <div class="service-card__head">
-                  <h3 class="service-card__title">Комплексное продвижение</h3>
-                  <span class="service-card__arrow" aria-hidden="true">→</span>
-                </div>
-                <p class="service-card__desc">Сайт, SEO, реклама и аналитика в одной связке — берём весь маркетинг клиники на себя.</p>
-                <span class="service-card__price">по запросу</span>
-              </div>
-            </li>
-            <li class="service-card">
-              <img class="service-card__media" src="assets/services/context.jpg" alt="" loading="lazy" width="600" height="800">
-              <span class="service-card__overlay" aria-hidden="true"></span>
-              <div class="service-card__body">
-                <div class="service-card__head">
-                  <h3 class="service-card__title">Контекстная реклама</h3>
-                  <span class="service-card__arrow" aria-hidden="true">→</span>
-                </div>
-                <p class="service-card__desc">Настраиваем кампании с учётом требований к рекламе медицинских услуг.</p>
-                <span class="service-card__price">по запросу</span>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        <!-- ======================= AUDIT FORM ======================= -->
-        <section class="audit" id="contact" aria-labelledby="audit-title">
-          <div class="audit__panel" data-js="reveal">
-            <div class="audit__glow" aria-hidden="true"></div>
-
-            <div class="audit__info">
-              <span class="eyebrow eyebrow--sky">БЕСПЛАТНО</span>
-              <h2 class="audit__title" id="audit-title">SEO-аудит в подарок</h2>
-              <p class="audit__text">Оставьте заявку и получите бесплатно SEO-аудит: поиск и исправление битых ссылок, анализ уникальности текстов, проверка скорости загрузки страниц.</p>
-              <div class="audit__contacts">
-                <a class="audit__contact" href="mailto:info@web-cosmos.ru">info@web-cosmos.ru</a>
-                <a class="audit__contact" href="tel:+78652600300">+7 (8652) 60-03-00</a>
-                <a class="audit__contact" href="tel:+79682660300">+7 968 266-03-00</a>
-              </div>
-            </div>
-
-            <div class="audit__form-area" data-js="audit-form" aria-live="polite">
-              <form class="form" data-js="form" action="#" method="post">
-                <div class="form__field">
-                  <label class="visually-hidden" for="lead-name">Ваше имя</label>
-                  <input class="form__input" data-js="input" id="lead-name" name="name" type="text" placeholder="Ваше имя" autocomplete="name" required>
-                </div>
-                <div class="form__field">
-                  <label class="visually-hidden" for="lead-phone">Ваш номер телефона</label>
-                  <input class="form__input" data-js="input" id="lead-phone" name="phone" type="tel" placeholder="Ваш номер телефона" autocomplete="tel" required>
-                </div>
-                <div class="form__field">
-                  <label class="visually-hidden" for="lead-site">Сайт клиники (если есть)</label>
-                  <input class="form__input" data-js="input" id="lead-site" name="site" type="url" placeholder="Сайт клиники (если есть)" autocomplete="url">
-                </div>
-                <button class="btn btn--primary form__submit" type="submit">Оставить заявку</button>
-                <span class="form__note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных</span>
-              </form>
-
-              <div class="form-success" data-js="success" role="status" hidden>
-                <span class="form-success__icon" aria-hidden="true">✓</span>
-                <h3 class="form-success__title" data-js="success-title" tabindex="-1">Заявка отправлена</h3>
-                <p class="form-success__text">Свяжемся с вами в течение рабочего дня.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ======================= PROMOS ======================= -->
-        <section class="promo" id="promo" aria-labelledby="promo-title">
-          <div class="section-head section-head--stacked promo__head" data-js="reveal">
-            <div class="section-head__titles">
-              <span class="eyebrow">АКЦИИ</span>
-              <h2 class="section-head__title" id="promo-title">Специальные предложения</h2>
-            </div>
-          </div>
-
-          <ul class="promo__list" data-js="reveal-group">
-            <li class="promo-card">
-              <div class="promo-card__media media-ph" aria-hidden="true">
-                <span class="media-ph__chip">баннер акции</span>
-              </div>
-              <div class="promo-card__body">
-                <h3 class="promo-card__title">Хостинг сайта на Битрикс — БЕСПЛАТНО НА ГОД!</h3>
-                <p class="promo-card__desc">Специальное предложение для тех, кто хочет сайт на Битрикс, но всё ещё ждёт лучших времён.</p>
-                <a class="btn btn--primary promo-card__link" href="#contact">Подробнее</a>
-              </div>
-            </li>
-            <li class="promo-card">
-              <div class="promo-card__media media-ph" aria-hidden="true">
-                <span class="media-ph__chip">баннер акции</span>
-              </div>
-              <div class="promo-card__body">
-                <h3 class="promo-card__title">Скидка на услуги техподдержки сайтов на Битрикс</h3>
-                <p class="promo-card__desc">Ваш сайт на Битрикс нуждается в доработках? Не откладывайте на завтра то, что можно заказать уже сегодня!</p>
-                <a class="btn btn--primary promo-card__link" href="#contact">Подробнее</a>
-              </div>
-            </li>
-            <li class="promo-card">
-              <div class="promo-card__media media-ph" aria-hidden="true">
-                <span class="media-ph__chip">баннер акции</span>
-              </div>
-              <div class="promo-card__body">
-                <h3 class="promo-card__title">Готовый сайт на Битрикс со скидкой 50%</h3>
-                <p class="promo-card__desc">Мы предлагаем уникальную возможность получить готовый интернет-ресурс на платформе Битрикс по специальной цене!</p>
-                <a class="btn btn--primary promo-card__link" href="#contact">Подробнее</a>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        <!-- ======================= ABOUT ======================= -->
-        <section class="about" id="about" aria-labelledby="about-title">
-          <div class="about__grid">
-            <div class="about__content" data-js="reveal">
-              <span class="eyebrow">О НАС</span>
-              <h2 class="about__title" id="about-title">Создать сайт по-умному — это к нам!</h2>
-              <p class="about__text">Интернет-агентство ВЕБ-КОСМОС основано в 2008 году. Изначально коллектив занимался созданием сайтов, но позднее в сферу интересов ВЕБ-КОСМОС вошли аудит, продвижение, техническая и информационная поддержка интернет-ресурсов.</p>
-              <p class="about__text">Сегодня компания оказывает полный спектр услуг для клиентов, желающих заказать создание сайта и его продвижение в поисковых системах. Коллектив продолжает создавать для своих заказчиков яркие оригинальные сайты, успешно помогает им увеличивать трафик и повышать конверсию ресурсов.</p>
-              <p class="about__text">В качестве основных принципов — демократичные расценки, полное отсутствие лишних накруток и точное соблюдение сроков. Дополнительный бонус — открытость, отчетность и полная информированность клиента. ВЕБ-КОСМОС — всегда приятное интересное сотрудничество!</p>
-            </div>
-            <ul class="about__stats" data-js="reveal-group" aria-label="Компания в цифрах">
-              <li class="stat">
-                <span class="stat__value">16</span>
-                <span class="stat__label">лет надёжной работы</span>
-              </li>
-              <li class="stat">
-                <span class="stat__value">250</span>
-                <span class="stat__label">созданных сайтов</span>
-              </li>
-              <li class="stat">
-                <span class="stat__value">75</span>
-                <span class="stat__label">клиентов на продвижении</span>
-              </li>
-              <li class="stat">
-                <span class="stat__value">10</span>
-                <span class="stat__label">штатных сотрудников</span>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- ======================= PARTNERS ======================= -->
-        <section class="partners" aria-labelledby="partners-title">
-          <div class="section-head partners__head" data-js="reveal">
-            <div class="section-head__titles">
-              <span class="eyebrow">НАШИ ПАРТНЁРЫ</span>
-              <h2 class="section-head__title" id="partners-title">Делаем сайты по-настоящему эффективными</h2>
-            </div>
-            <p class="section-head__note">Мы работаем в сфере создания и продвижения сайтов с 2008 года. За это время у нас сотни реализованных проектов и благодарности от клиентов.</p>
-          </div>
-
-          <ul class="partners__list" data-js="reveal-group" data-reveal-stagger="40">
-            <li class="partners__chip">Битрикс24</li>
-            <li class="partners__chip">1С-Битрикс</li>
-            <li class="partners__chip">Яндекс Директ</li>
-            <li class="partners__chip">Google Ads</li>
-            <li class="partners__chip">Яндекс Маркет</li>
-            <li class="partners__chip">amoCRM</li>
-            <li class="partners__chip">рег.ру</li>
-            <li class="partners__chip">Яндекс Метрика</li>
-            <li class="partners__chip">РУЦЕНТР</li>
-            <li class="partners__chip">Calltouch</li>
-            <li class="partners__chip">beget</li>
-          </ul>
-
-          <div class="partners__banner banner" data-js="reveal">
-            <span class="banner__icon" aria-hidden="true">1С</span>
-            <div class="banner__body">
-              <span class="banner__title">Золотой сертифицированный партнёр «1С-Битрикс»</span>
-              <span class="banner__text">Разрабатываем и поддерживаем сайты клиник на платформе Битрикс</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- ======================= BLOG ======================= -->
-        <section class="blog" id="blog" aria-labelledby="blog-title">
-          <div class="section-head blog__head" data-js="reveal">
-            <div class="section-head__titles">
-              <span class="eyebrow">БЛОГ</span>
-              <h2 class="section-head__title" id="blog-title">Кейсы и статьи о медицинском маркетинге</h2>
-            </div>
-            <a class="section-head__link" href="#blog">Все статьи <span aria-hidden="true">→</span></a>
-          </div>
-
-          <ul class="blog__grid" data-js="reveal-group">
-            <li class="blog__item">
-              <a class="post-card" href="#blog">
-                <div class="post-card__media media-ph" aria-hidden="true">
-                  <span class="media-ph__chip">фото статьи</span>
-                </div>
-                <div class="post-card__body">
-                  <h3 class="post-card__title">Как за 4 месяца вывести новую косметологию в топ Москвы: кейс клиники «Микос»</h3>
-                  <p class="post-card__desc">Рассказываем, как мы с нуля создали онлайн-присутствие для новой косметологической клиники.</p>
-                  <time class="post-card__date" datetime="2025-10-14">14 октября 2025</time>
-                </div>
-              </a>
-            </li>
-            <li class="blog__item">
-              <a class="post-card" href="#blog">
-                <div class="post-card__media media-ph" aria-hidden="true">
-                  <span class="media-ph__chip">фото статьи</span>
-                </div>
-                <div class="post-card__body">
-                  <h3 class="post-card__title">От 4,31 до 4,7: как мы спасли репутацию клиники, которую «убивала» агрессивная реклама</h3>
-                  <p class="post-card__desc">История самарской клиники, где качественная медицина терялась за шквалом негатива.</p>
-                  <time class="post-card__date" datetime="2025-10-09">9 октября 2025</time>
-                </div>
-              </a>
-            </li>
-            <li class="blog__item">
-              <a class="post-card" href="#blog">
-                <div class="post-card__media media-ph" aria-hidden="true">
-                  <span class="media-ph__chip">фото статьи</span>
-                </div>
-                <div class="post-card__body">
-                  <h3 class="post-card__title">Как мы увеличили трафик пластического хирурга на 238% без рекламного бюджета</h3>
-                  <p class="post-card__desc">Реальный кейс оптимизации Яндекс.Карт для пластического хирурга.</p>
-                  <time class="post-card__date" datetime="2025-09-25">25 сентября 2025</time>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </section>
-
-        <!-- ======================= TELEGRAM ======================= -->
-        <section class="telegram" aria-labelledby="telegram-title">
-          <div class="telegram__panel" data-js="reveal">
-            <div class="telegram__glow" aria-hidden="true"></div>
-            <div class="telegram__body">
-              <h2 class="telegram__title" id="telegram-title">Интеллектуальный медицинский маркетинг!</h2>
-              <p class="telegram__text">Подпишитесь на наш telegram-канал WebCosmos | Pro.Marketing</p>
-            </div>
-            <a class="btn btn--light telegram__btn" href="https://t.me/web_cosmos" target="_blank" rel="noopener">Подписаться на канал</a>
-          </div>
-        </section>
-
-      </main>
-
-      <!-- ======================= FOOTER ======================= -->
-      <footer class="footer">
-        <div class="footer__grid">
-          <div class="footer__col footer__col--company">
-            <div class="logo footer__logo">
-              <img class="logo__mark logo__mark--lg" src="assets/logo-mark.svg" alt="" width="28" height="32">
-              <span class="logo__text">
-                <span class="logo__name logo__name--lg">WEBCOSMOS</span>
-                <span class="logo__tagline logo__tagline--lg">маркетинг и аналитика в медицине</span>
-              </span>
-            </div>
-            <p class="footer__note">Остались вопросы? Задайте их — и мы обязательно ответим.</p>
-            <div class="footer__messengers">
-              <a class="footer__messenger" href="https://wa.me/79682660300" target="_blank" rel="noopener">WhatsApp</a>
-              <a class="footer__messenger" href="https://t.me/web_cosmos" target="_blank" rel="noopener">Telegram</a>
-            </div>
-          </div>
-
-          <nav class="footer__col" aria-label="Популярные услуги">
-            <span class="footer__heading" id="footer-services">ПОПУЛЯРНЫЕ УСЛУГИ</span>
-            <ul class="footer__list" aria-labelledby="footer-services">
-              <li><a class="footer__link" href="#services">SEO-аудит</a></li>
-              <li><a class="footer__link" href="#services">SMM</a></li>
-              <li><a class="footer__link" href="#services">SEO продвижение</a></li>
-              <li><a class="footer__link" href="#services">Яндекс Директ</a></li>
-              <li><a class="footer__link" href="#services">Медицинский копирайтинг</a></li>
-              <li><a class="footer__link" href="#services">Создание сайта</a></li>
-            </ul>
-          </nav>
-
-          <nav class="footer__col" aria-label="Компания">
-            <span class="footer__heading" id="footer-company">КОМПАНИЯ</span>
-            <ul class="footer__list" aria-labelledby="footer-company">
-              <li><a class="footer__link" href="#about">О компании</a></li>
-              <li><a class="footer__link" href="#services">Услуги</a></li>
-              <li><a class="footer__link" href="#blog">Блог</a></li>
-              <li><a class="footer__link" href="#promo">Акции</a></li>
-              <li><a class="footer__link" href="#contact">Контакты</a></li>
-            </ul>
-          </nav>
-
-          <div class="footer__col footer__col--contacts">
-            <div class="footer__contact">
-              <span class="footer__heading">АДРЕС</span>
-              <span class="footer__value">г. Ставрополь, проспект Кулакова 7г</span>
-            </div>
-            <div class="footer__contact">
-              <span class="footer__heading">ТЕЛЕФОН</span>
-              <a class="footer__link" href="tel:+78652600300">+7 (8652) 60-03-00</a>
-              <a class="footer__link" href="tel:+79682660300">+7 968 266-03-00</a>
-            </div>
-            <div class="footer__contact">
-              <span class="footer__heading">ПОЧТА</span>
-              <a class="footer__link" href="mailto:info@web-cosmos.ru">info@web-cosmos.ru</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer__bottom">
-          <a class="footer__legal" href="#">Пользовательское соглашение</a>
-          <span class="footer__copyright">© 2008–2026. WEB-COSMOS</span>
-          <a class="footer__legal" href="#">Политика конфиденциальности</a>
-        </div>
-      </footer>
-
-    </div>
-  </div>
+    <p class="foot">Хостинг: GitHub Pages · <a href="https://github.com/odik8/odik8.github.io">исходный код</a></p>
+  </main>
 </body>
 </html>
