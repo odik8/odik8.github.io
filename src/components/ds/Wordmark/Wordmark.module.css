@@ -1,0 +1,16 @@
+.mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.06em;
+  font: var(--fw-extrabold) var(--wordmark-size) / 1 var(--font-sans);
+  letter-spacing: -0.04em;
+  color: var(--text-heading);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.dot {
+  color: var(--primary);
+}

@@ -1,0 +1,12 @@
+.section {
+  max-width: var(--page-max);
+  margin: var(--section-gap) auto 0;
+  padding: 0 var(--page-pad);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: var(--grid-gutter);
+  margin-top: var(--space-10);
+}

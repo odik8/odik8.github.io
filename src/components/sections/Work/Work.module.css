@@ -1,0 +1,19 @@
+.section {
+  max-width: var(--page-max);
+  margin: var(--section-gap) auto 0;
+  padding: 0 var(--page-pad);
+}
+
+/* This brand lists work; it does not grid it. Rows carry their own top rule,
+   so the list only needs to close itself. */
+.list {
+  border-bottom: 1px solid var(--line);
+  margin-top: var(--space-10);
+}
+
+.note {
+  font: var(--type-body);
+  color: var(--text-muted);
+  max-width: 52ch;
+  margin-top: var(--space-6);
+}

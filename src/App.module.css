@@ -1,0 +1,4 @@
+/* Full-bleed elements are type: the marquee band is one of exactly two. */
+.band {
+  margin: var(--space-16) 0;
+}

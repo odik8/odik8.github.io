@@ -1,0 +1,25 @@
+/* Verbatim from the Odyssey design system — tokens/motion.css */
+:root {
+  --transition: all 0.3s ease-in-out;
+  --dur-instant: 80ms;
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 600ms;
+  --dur-reveal: 900ms;
+
+  --ease-in-out: ease-in-out;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.5, 0, 0.75, 0);
+
+  --marquee-dur: 28s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: none;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --dur-reveal: 0ms;
+    --marquee-dur: 0s;
+  }
+}

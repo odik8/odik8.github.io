@@ -1,0 +1,112 @@
+/* From the Odyssey design system — tokens/base.css, plus the page-level rules
+   the .dc.html mock declared inline (smooth scroll, horizontal overflow lock). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--surface-page);
+  color: var(--text-body);
+  font: var(--type-body);
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  color: var(--text-heading);
+  letter-spacing: var(--track-display);
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--text-heading);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-accent);
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+a:active {
+  color: var(--primary-press);
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--text-on-primary);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+hr {
+  border: 0;
+  border-top: var(--rule-width) solid var(--line);
+  margin: 0;
+}
+
+code,
+kbd,
+pre {
+  font: var(--type-code);
+  letter-spacing: var(--track-mono);
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-light);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* The mock's <a> reset assumes every link is an editorial link with a hairline
+   underline. Components that render their own chrome opt out with this class. */
+.bare-link,
+.bare-link:hover {
+  border-bottom: none;
+}

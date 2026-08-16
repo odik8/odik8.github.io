@@ -1,0 +1,54 @@
+/* From the Odyssey design system — tokens/typography.css.
+   Единственная правка: --font-sans / --font-mono указывают на переменные
+   шрифты из пакетов @fontsource (те же Manrope и JetBrains Mono, что
+   подключал next/font), а не на @import из Google Fonts. */
+:root {
+  --font-sans: "Manrope Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Manrope axis stops actually used. 200 and 800 are the brand's two voices. */
+  --fw-extralight: 200;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* Fluid display sizes — the layout signature is type that runs edge to edge. */
+  --display-1: clamp(3.5rem, 11vw, 11rem);
+  --display-2: clamp(2.75rem, 7.5vw, 7rem);
+  --display-3: clamp(2rem, 4.6vw, 4rem);
+
+  --text-3xl: 2.5rem;
+  --text-2xl: 2rem;
+  --text-xl: 1.5rem;
+  --text-lg: 1.25rem;
+  --text-md: 1.0625rem;
+  --text-sm: 0.9375rem;
+  --text-xs: 0.8125rem;
+  --text-2xs: 0.6875rem;
+
+  --leading-display: 0.9;
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-body: 1.55;
+  --leading-loose: 1.75;
+
+  --track-display: -0.045em;
+  --track-tight: -0.02em;
+  --track-normal: 0em;
+  --track-label: 0.16em;
+  --track-mono: 0.02em;
+
+  /* Semantic type roles */
+  --type-display: var(--fw-extrabold) var(--display-1) / var(--leading-display) var(--font-sans);
+  --type-h1: var(--fw-extrabold) var(--display-2) / var(--leading-display) var(--font-sans);
+  --type-h2: var(--fw-bold) var(--display-3) / var(--leading-tight) var(--font-sans);
+  --type-h3: var(--fw-bold) var(--text-xl) / var(--leading-snug) var(--font-sans);
+  --type-body: var(--fw-regular) var(--text-md) / var(--leading-body) var(--font-sans);
+  --type-body-lg: var(--fw-light) var(--text-lg) / var(--leading-body) var(--font-sans);
+  --type-ui: var(--fw-semibold) var(--text-sm) / 1.2 var(--font-sans);
+  --type-label: var(--fw-medium) var(--text-2xs) / 1.2 var(--font-mono);
+  --type-code: var(--fw-regular) var(--text-xs) / var(--leading-snug) var(--font-mono);
+}

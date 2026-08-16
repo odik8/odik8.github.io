@@ -1,0 +1,35 @@
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease-in-out,
+    width 0.3s ease-in-out,
+    height 0.3s ease-in-out,
+    margin 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
+}
+
+.over {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-color: var(--primary);
+  background-color: color-mix(in oklch, var(--primary) 12%, transparent);
+}
+
+/* No ring on touch, and none when motion is turned down. */
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}

@@ -1,0 +1,192 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: var(--space-4) var(--page-pad) 0;
+  transition: var(--transition);
+}
+
+.hidden {
+  transform: translateY(calc(-100% - 8px));
+}
+
+.island {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-left: var(--space-8);
+  padding-right: var(--space-6);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  background: oklch(0.1 0 264 / 0.72);
+  backdrop-filter: var(--blur-chrome);
+  -webkit-backdrop-filter: var(--blur-chrome);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-m);
+  transition: var(--transition);
+  transform-origin: top center;
+  opacity: 0;
+  animation: island 0.85s var(--ease-out) 1.45s forwards;
+}
+
+/* Past 24px the island tightens: shorter, brighter edge, deeper shadow. */
+.lifted {
+  height: 56px;
+  box-shadow: var(--shadow-l);
+  border-color: var(--line-strong);
+}
+
+.header:has(.lifted) {
+  padding-top: var(--space-3);
+}
+
+@keyframes island {
+  from {
+    transform: translateY(-150%) scaleX(0.86);
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .island {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.brand {
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+.brand:hover {
+  border-bottom: none;
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.link {
+  border-bottom: none;
+  font: var(--type-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.link:hover {
+  color: var(--primary);
+  border-bottom: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex: none;
+}
+
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--text-heading);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.burger:hover {
+  border-color: var(--line-strong);
+  background: oklch(1 0 264 / 0.06);
+}
+
+/* --- The island cannot carry four nav links and a CTA on a phone. --- */
+@media (max-width: 1000px) {
+  .nav {
+    display: none;
+  }
+  .burger {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 560px) {
+  .island {
+    padding-left: var(--space-5);
+    padding-right: var(--space-4);
+    gap: var(--space-4);
+  }
+  .cta {
+    display: none;
+  }
+}
+
+/* --- Full-height panel behind the island --- */
+/* Base state is closed. `display: flex` here would out-specify the UA's
+   [hidden] { display: none } and leave the panel permanently on screen. */
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-10);
+  padding: var(--space-24) var(--page-pad) var(--space-16);
+  /* The modal veil alpha (0.72) is tuned for a dialog that sits over dimmed
+     content. A full-screen nav has to win outright against display type behind
+     it, so this goes nearly opaque and keeps the blur for the edges. */
+  background: oklch(0.1 0 264 / 0.97);
+  backdrop-filter: var(--blur-veil);
+  -webkit-backdrop-filter: var(--blur-veil);
+}
+
+.panelOpen {
+  display: flex;
+}
+
+.panelNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.panelLink {
+  border-bottom: none;
+  font: var(--fw-extrabold) clamp(2rem, 9vw, 3.5rem) / 1 var(--font-sans);
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+  color: var(--text-heading);
+}
+.panelLink:hover {
+  color: var(--primary);
+  border-bottom: none;
+}
+
+@media (min-width: 1001px) {
+  .panel,
+  .panelOpen {
+    display: none;
+  }
+}

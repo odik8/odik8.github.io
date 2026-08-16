@@ -1,0 +1,122 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-pill);
+  font: var(--type-ui);
+  letter-spacing: var(--track-tight);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+/* The global <a> reset gives every link an editorial hairline underline.
+   Buttons draw their own chrome, so they opt out. */
+a.button,
+a.button:hover {
+  border-bottom-style: solid;
+}
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* --- sizes --- */
+.sm {
+  height: var(--control-h-sm);
+  padding: 0 14px;
+  font-size: var(--text-xs);
+}
+.md {
+  height: var(--control-h-md);
+  padding: 0 20px;
+  font-size: var(--text-sm);
+}
+.lg {
+  height: var(--control-h-lg);
+  padding: 0 28px;
+  font-size: var(--text-md);
+}
+
+.full {
+  display: flex;
+  width: 100%;
+}
+
+/* --- variants --- */
+.primary {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border-color: transparent;
+  box-shadow: var(--shadow-m);
+}
+.primary:hover {
+  background: var(--primary-hover);
+  color: var(--text-on-primary);
+  border-color: transparent;
+}
+.primary:active {
+  background: var(--primary-press);
+  box-shadow: var(--shadow-inset);
+  transform: translateY(1px);
+}
+
+.secondary {
+  background: var(--bg);
+  color: var(--text-heading);
+  border-color: var(--line);
+  box-shadow: var(--shadow-s);
+}
+.secondary:hover {
+  background: var(--bg-light);
+  color: var(--text-heading);
+  border-color: var(--line);
+}
+.secondary:active {
+  background: var(--bg);
+  box-shadow: var(--shadow-inset);
+  transform: translateY(1px);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--text-heading);
+  border-color: var(--line);
+  box-shadow: none;
+}
+.ghost:hover {
+  background: oklch(1 0 264 / 0.06);
+  color: var(--text-heading);
+  border-color: var(--line-strong);
+}
+.ghost:active {
+  box-shadow: var(--shadow-inset);
+  transform: translateY(1px);
+}
+
+.link {
+  background: transparent;
+  color: var(--text-heading);
+  border-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  height: auto;
+}
+.link:hover {
+  color: var(--primary);
+  border-color: transparent;
+}
+
+/* The house arrow drifts up-and-right on hover — never opacity. */
+.iconRight {
+  transition: var(--transition);
+}
+.button:hover .iconRight {
+  transform: translate(2px, -2px);
+}

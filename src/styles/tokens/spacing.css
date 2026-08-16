@@ -1,0 +1,32 @@
+/* Verbatim from the Odyssey design system — tokens/spacing.css */
+:root {
+  /* 4px base. Odyssey uses the wide end of this scale far more than the narrow end. */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-40: 160px;
+  --space-48: 192px;
+
+  /* Layout */
+  --page-max: 1512px;
+  --page-pad: clamp(20px, 4.5vw, 72px);
+  --section-gap: clamp(80px, 12vw, 192px);
+  --stack-gap: var(--space-6);
+  --grid-cols: 12;
+  --grid-gutter: clamp(16px, 1.8vw, 28px);
+  --rule-width: 1px;
+  --control-h-sm: 34px;
+  --control-h-md: 42px;
+  --control-h-lg: 54px;
+}

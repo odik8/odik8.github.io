@@ -1,0 +1,60 @@
+.band {
+  overflow: hidden;
+  border-top: var(--rule-width) solid var(--line);
+  border-bottom: var(--rule-width) solid var(--line);
+  padding: var(--space-4) 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  gap: var(--space-8);
+  align-items: center;
+  animation: scroll var(--marquee-speed, 28s) linear infinite;
+}
+
+.reverse {
+  animation-direction: reverse;
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.item {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+  white-space: nowrap;
+}
+
+.outline,
+.solid {
+  font: var(--fw-extrabold) var(--marquee-size, 3rem) / 1 var(--font-sans);
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+}
+
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+}
+
+.solid {
+  color: var(--text-heading);
+}
+
+.separator {
+  color: var(--primary);
+  font: var(--fw-regular) var(--marquee-size, 3rem) / 1 var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

@@ -1,0 +1,45 @@
+.reveal > * {
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+/* Only the armed state hides anything, and it is only ever set client-side. */
+.armed > * {
+  opacity: 0;
+}
+
+.armed.up > * {
+  transform: translateY(22px);
+}
+
+.armed.slideX > * {
+  transform: translateX(-20px);
+}
+
+.reveal > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.reveal > *:nth-child(2) {
+  transition-delay: var(--reveal-step, 80ms);
+}
+.reveal > *:nth-child(3) {
+  transition-delay: calc(var(--reveal-step, 80ms) * 2);
+}
+.reveal > *:nth-child(4) {
+  transition-delay: calc(var(--reveal-step, 80ms) * 3);
+}
+.reveal > *:nth-child(5) {
+  transition-delay: calc(var(--reveal-step, 80ms) * 4);
+}
+.reveal > *:nth-child(n + 6) {
+  transition-delay: calc(var(--reveal-step, 80ms) * 5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal > * {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
