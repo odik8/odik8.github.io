@@ -1,4 +1,3 @@
-export { CaseStudy } from "./CaseStudy/CaseStudy";
 export { Contact } from "./Contact/Contact";
 export { Hero } from "./Hero/Hero";
 export { Stack } from "./Stack/Stack";

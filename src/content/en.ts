@@ -71,7 +71,7 @@ export const en: SiteContent = {
         title: "Pravo na Zaschitu",
         meta: ["React 19", "TypeScript", "Vite"],
         year: "2026",
-        href: "#case",
+        href: links.repoPravo,
       },
       {
         index: "02",
@@ -81,52 +81,11 @@ export const en: SiteContent = {
         href: links.repoTodo,
       },
     ],
-    note: "Todo is a study project: React, Vite, SCSS, data from db.json5. The portal below is described in detail.",
-  },
-
-  caseStudy: {
-    index: "03",
-    eyebrow: "Case study",
-    title: "Pravo na Zaschitu",
-    lede:
-      "A client portal for a personal-bankruptcy law firm. The screens and fields come from a live site that had static markup and no logic; I built a working portal underneath it.",
-    mediaPlaceholder: "Interface screenshots — no files supplied yet",
-    facts: [
-      { label: "Role", value: "Front end, solo" },
-      { label: "Stack", value: "React 19 · TypeScript · Vite · CSS modules" },
-      { label: "Status", value: "Complete, on a study server" },
-    ],
-    repoLabel: "Code",
-    metrics: [
-      { value: "6", label: "sections, from case stages to chat" },
-      { value: "27", label: "questionnaire fields kept as a draft" },
-    ],
-    blocks: [
-      {
-        title: "The problem",
-        paragraphs: [
-          "The firm had screens and no logic: a client could not see the stage of their case, send the questionnaire, upload documents, sign the contract or look at the instalment schedule. All of it had to fit the markup that already existed, without changing the set of fields.",
-        ],
-      },
-      {
-        title: "What I built",
-        paragraphs: [
-          "Login by code, the whole portal fetched in one bootstrap request, a questionnaire kept as a draft, document upload and removal, contract signing, chat with the lawyer and the manager, payments with the instalment schedule, and notifications.",
-          "One Vite application: routes, state and requests sit next to each other, and the response types are written once and used by both the forms and the screens. A study server on express reads and writes the data.",
-        ],
-      },
-      {
-        title: "What deliberately does not work",
-        paragraphs: [
-          "The server is a study one: the token is fake and there are no real text messages — the confirmation code appears on screen. Payment is not real either: a provider needs a company and a contract. Chat has no realtime — messages arrive on reload. There is no staff panel in the project: this is the client portal and nothing else.",
-        ],
-      },
-    ],
-    cta: "Read the code",
+    note: "Todo is a study project: React, Vite, SCSS, data from db.json5.",
   },
 
   team: {
-    index: "04",
+    index: "03",
     eyebrow: "Team",
     title: "Working in a team",
     lede:
@@ -151,7 +110,7 @@ export const en: SiteContent = {
   },
 
   contact: {
-    eyebrow: "05 — Now",
+    eyebrow: "04 — Now",
     title: "Looking for work",
     lede:
       "Looking for a permanent front-end position, junior level included. React and TypeScript. Full time, relocation possible.",

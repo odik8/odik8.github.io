@@ -8,11 +8,6 @@ export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
 
-export interface LabelledValue {
-  label: string;
-  value: string;
-}
-
 export interface StackCard {
   index: string;
   title: string;
@@ -25,16 +20,6 @@ export interface WorkRow {
   meta: string[];
   year: string;
   href: string;
-}
-
-export interface Metric {
-  value: string;
-  label: string;
-}
-
-export interface ProseBlock {
-  title: string;
-  paragraphs: string[];
 }
 
 export interface TeamCard {
@@ -84,18 +69,6 @@ export interface SiteContent {
     title: string;
     rows: WorkRow[];
     note: string;
-  };
-  caseStudy: {
-    index: string;
-    eyebrow: string;
-    title: string;
-    lede: string;
-    mediaPlaceholder: string;
-    facts: LabelledValue[];
-    repoLabel: string;
-    metrics: Metric[];
-    blocks: ProseBlock[];
-    cta: string;
   };
   team: {
     index: string;

@@ -4,7 +4,7 @@ import { Loader } from "@/components/effects/Loader/Loader";
 import { SmoothScroll } from "@/components/effects/SmoothScroll/SmoothScroll";
 import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
-import { CaseStudy, Contact, Hero, Stack, Team, Work } from "@/components/sections";
+import { Contact, Hero, Stack, Team, Work } from "@/components/sections";
 import { getContent } from "@/content";
 import { useHead } from "@/lib/meta";
 import { useLocale } from "@/lib/router";
@@ -36,7 +36,6 @@ export function App() {
 
         <Stack stack={content.stack} />
         <Work work={content.work} />
-        <CaseStudy caseStudy={content.caseStudy} />
         <Team team={content.team} />
         <Contact contact={content.contact} />
       </main>

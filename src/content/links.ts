@@ -7,6 +7,5 @@ export const links = {
   github: "https://github.com/odik8",
   githubHandle: "github.com/odik8",
   repoPravo: "https://github.com/odik8/pravo",
-  repoPravoHandle: "github.com/odik8/pravo",
   repoTodo: "https://github.com/odik8/todo-react",
 } as const;
