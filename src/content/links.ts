@@ -6,6 +6,6 @@ export const links = {
   email: "odissey.meltonyan@gmail.com",
   github: "https://github.com/odik8",
   githubHandle: "github.com/odik8",
-  repoPravo: "https://github.com/odik8/pravo",
+  repoPravo: "https://github.com/odik8/lk-pravo",
   repoTodo: "https://github.com/odik8/todo-react",
 } as const;
